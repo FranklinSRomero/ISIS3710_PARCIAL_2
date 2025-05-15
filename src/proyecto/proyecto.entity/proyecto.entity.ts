@@ -5,7 +5,6 @@ import { ProfesorEntity } from 'src/profesor/profesor.entity/profesor.entity';
 import {
   Column,
   Entity,
-  Long,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -14,7 +13,7 @@ import {
 @Entity()
 export class ProyectoEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: Long;
+  id: string;
 
   @Column()
   titulo: string;

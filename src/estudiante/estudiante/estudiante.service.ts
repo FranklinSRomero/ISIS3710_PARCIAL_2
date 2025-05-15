@@ -3,6 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { EstudianteEntity } from '../estudiante.entity/estudiante.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
+import {
+  BusinessError,
+  BusinessLogicException,
+} from 'src/shared/errors/business-errors';
 
 @Injectable()
 export class EstudianteService {
@@ -15,12 +19,25 @@ export class EstudianteService {
   ) {}
 
   async create(estudiante: EstudianteEntity): Promise<EstudianteEntity> {
+    if (estudiante.promedio < 3.2) {
+      throw new BusinessLogicException(
+        'El promedio debe ser mayor a 3.2',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
+    if (estudiante.semestre <= 4) {
+      throw new BusinessLogicException(
+        'El semestre debe ser mayor o igual a 4',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
     return await this.estudianteRepository.save(estudiante);
   }
 
   async delete(id: string) {
-    const estudiante: EstudianteEntity =
-      await this.estudianteRepository.findOne({ where: { id } });
+    const estudiante = await this.estudianteRepository.findOne({
+      where: { id },
+    });
     if (!estudiante)
       throw new BusinessLogicException(
         'The museum with the given id was not found',
