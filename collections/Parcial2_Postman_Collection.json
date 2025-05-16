@@ -1,0 +1,631 @@
+{
+  "info": {
+    "_postman_id": "7e5c4f5a-3a2e-4f5b-8d33-5c3f6c3d7e9b",
+    "name": "Parcial 2 - Sistema de Gestión de Iniciativas",
+    "description": "API para el sistema de gestión de iniciativas lideradas por estudiantes de pregrado.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Estudiantes",
+      "item": [
+        {
+          "name": "Obtener Todos los Estudiantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/estudiantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "estudiantes"
+              ]
+            },
+            "description": "Obtiene la lista de todos los estudiantes registrados en el sistema."
+          },
+          "response": [
+            {
+              "name": "Éxito",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"cedula\": 1020304050,\n        \"nombre\": \"Juan Pérez\",\n        \"semestre\": 5,\n        \"programa\": \"Ingeniería de Sistemas\",\n        \"promedio\": 4.2\n    },\n    {\n        \"id\": 2,\n        \"cedula\": 1030405060,\n        \"nombre\": \"María García\",\n        \"semestre\": 6,\n        \"programa\": \"Ingeniería Industrial\",\n        \"promedio\": 3.8\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Obtener Estudiante por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/estudiantes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "estudiantes",
+                "1"
+              ]
+            },
+            "description": "Obtiene un estudiante específico por su ID."
+          },
+          "response": [
+            {
+              "name": "Éxito",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 4.2\n}"
+            },
+            {
+              "name": "No encontrado",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/999",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes",
+                    "999"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 404,\n    \"message\": \"El estudiante con el id dado no fue encontrado\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Crear Estudiante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 4.2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/estudiantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "estudiantes"
+              ]
+            },
+            "description": "Crea un nuevo estudiante en el sistema. Solo permite estudiantes con promedio > 3.2 y semestre ≥ 4."
+          },
+          "response": [
+            {
+              "name": "Éxito",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 4.2\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"id\": 3,\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 4.2\n}"
+            },
+            {
+              "name": "Precondición Fallida - Promedio bajo",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 3.0\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes"
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 412,\n    \"message\": \"El promedio debe ser mayor a 3.2\"\n}"
+            },
+            {
+              "name": "Precondición Fallida - Semestre bajo",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cedula\": 1020304050,\n    \"nombre\": \"Juan Pérez\",\n    \"semestre\": 3,\n    \"programa\": \"Ingeniería de Sistemas\",\n    \"promedio\": 4.2\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/estudiantes",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes"
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 412,\n    \"message\": \"El semestre debe ser mayor o igual a 4\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Eliminar Estudiante",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/estudiantes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "estudiantes",
+                "1"
+              ]
+            },
+            "description": "Elimina un estudiante. No se puede eliminar si tiene proyectos activos."
+          },
+          "response": [
+            {
+              "name": "Éxito",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes",
+                    "1"
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "Precondición Fallida - Proyectos activos",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes",
+                    "2"
+                  ]
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 412,\n    \"message\": \"No se puede eliminar un estudiante con proyectos activos\"\n}"
+            },
+            {
+              "name": "No encontrado",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/estudiantes/999",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "estudiantes",
+                    "999"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 404,\n    \"message\": \"El estudiante con el id dado no fue encontrado\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Operaciones relacionadas con estudiantes."
+    },
+    {
+      "name": "Profesores",
+      "item": [
+        {
+          "name": "Obtener Todos los Profesores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profesores",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profesores"
+              ]
+            },
+            "description": "Obtiene la lista de todos los profesores registrados en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Profesor por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profesores/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profesores",
+                "1"
+              ]
+            },
+            "description": "Obtiene un profesor específico por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Profesor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cedula\": 80123456,\n    \"nombre\": \"Carlos Rodríguez\",\n    \"departamento\": \"Ingeniería de Sistemas\",\n    \"extension\": 12345,\n    \"esParEvaluador\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profesores",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profesores"
+              ]
+            },
+            "description": "Crea un nuevo profesor en el sistema. Valida que la extensión tenga exactamente 5 dígitos."
+          },
+          "response": []
+        },
+        {
+          "name": "Asignar Evaluador",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/profesores/1/evaluaciones/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profesores",
+                "1",
+                "evaluaciones",
+                "2"
+              ]
+            },
+            "description": "Asigna un profesor como evaluador. Solo si el profesor tiene menos de 3 evaluaciones activas."
+          },
+          "response": []
+        }
+      ],
+      "description": "Operaciones relacionadas con profesores."
+    },
+    {
+      "name": "Proyectos",
+      "item": [
+        {
+          "name": "Obtener Todos los Proyectos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/proyectos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "proyectos"
+              ]
+            },
+            "description": "Obtiene la lista de todos los proyectos registrados en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Proyecto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/proyectos/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "proyectos",
+                "1"
+              ]
+            },
+            "description": "Obtiene un proyecto específico por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Estudiantes del Proyecto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/proyectos/1/estudiantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "proyectos",
+                "1",
+                "estudiantes"
+              ]
+            },
+            "description": "Obtiene el estudiante asociado a un proyecto específico."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Proyecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"Sistema de gestión académica para universidades colombianas\",\n    \"area\": \"Desarrollo de software\",\n    \"presupuesto\": 20000000,\n    \"notaFinal\": 0,\n    \"estado\": 0,\n    \"fechaInicio\": \"2023-05-01\",\n    \"fechaFin\": \"2023-12-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/proyectos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "proyectos"
+              ]
+            },
+            "description": "Crea un nuevo proyecto. Valida que el presupuesto sea > 0 y que el título tenga más de 15 caracteres."
+          },
+          "response": []
+        },
+        {
+          "name": "Avanzar Proyecto",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/proyectos/1/avanzar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "proyectos",
+                "1",
+                "avanzar"
+              ]
+            },
+            "description": "Avanza el estado de un proyecto. Un proyecto puede tener un estado entre 0 y 4."
+          },
+          "response": []
+        }
+      ],
+      "description": "Operaciones relacionadas con proyectos."
+    },
+    {
+      "name": "Evaluaciones",
+      "item": [
+        {
+          "name": "Obtener Todas las Evaluaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/evaluaciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "evaluaciones"
+              ]
+            },
+            "description": "Obtiene la lista de todas las evaluaciones registradas en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Evaluación por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/evaluaciones/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "evaluaciones",
+                "1"
+              ]
+            },
+            "description": "Obtiene una evaluación específica por su ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear Evaluación",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"calificacion\": 4.5,\n    \"proyecto\": {\n        \"id\": 1\n    },\n    \"evaluador\": {\n        \"id\": 2\n    }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/evaluaciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "evaluaciones"
+              ]
+            },
+            "description": "Crea una nueva evaluación. Valida que evaluador ≠ mentor y que la calificación esté entre 0 y 5."
+          },
+          "response": []
+        }
+      ],
+      "description": "Operaciones relacionadas con evaluaciones."
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

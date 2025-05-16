@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-export function BusinessLogicException(message: string, type: number) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  this.message = message;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  this.type = type;
+export class BusinessLogicException extends Error {
+  constructor(public message: string, public type: number) {
+    super(message);
+    this.name = 'BusinessLogicException';
+  }
 }
 
 export enum BusinessError {

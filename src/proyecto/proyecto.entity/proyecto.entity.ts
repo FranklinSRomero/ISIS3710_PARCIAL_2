@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { EstudianteEntity } from 'src/estudiante/estudiante.entity/estudiante.entity';
-import { EvaluacionEntity } from 'src/evaluacion/evaluacion.entity/evaluacion.entity';
-import { ProfesorEntity } from 'src/profesor/profesor.entity/profesor.entity';
+import { EstudianteEntity } from '../../estudiante/estudiante.entity/estudiante.entity';
+import { EvaluacionEntity } from '../../evaluacion/evaluacion.entity/evaluacion.entity';
+import { ProfesorEntity } from '../../profesor/profesor.entity/profesor.entity';
 import {
   Column,
   Entity,
@@ -12,8 +12,8 @@ import {
 
 @Entity()
 export class ProyectoEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   titulo: string;
@@ -43,5 +43,5 @@ export class ProyectoEntity {
   estudiante: EstudianteEntity;
 
   @ManyToOne(() => ProfesorEntity, (profesor) => profesor.proyectos)
-  profesor: ProfesorEntity;
+  mentor: ProfesorEntity;
 }

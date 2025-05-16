@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity/proyecto.entity';
+import { ProyectoEntity } from '../../proyecto/proyecto.entity/proyecto.entity';
+import { EvaluacionEntity } from '../../evaluacion/evaluacion.entity/evaluacion.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class ProfesorEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   cedula: number;
@@ -20,8 +21,11 @@ export class ProfesorEntity {
   extension: number;
 
   @Column()
-  esparevaluador: boolean;
+  esParEvaluador: boolean;
 
-  @OneToMany(() => ProyectoEntity, (proyecto) => proyecto.profesor)
+  @OneToMany(() => ProyectoEntity, (proyecto) => proyecto.mentor)
   proyectos: ProyectoEntity[];
+
+  @OneToMany(() => EvaluacionEntity, (evaluacion) => evaluacion.evaluador)
+  evaluaciones: EvaluacionEntity[];
 }
